@@ -34,11 +34,21 @@ app.controller('MainCtrl', function($scope, posts){
     post.upvotes++;
   };
 
+  $scope.addComment = function(){
+    if($scope.body === '') { return; }
+    $scope.posts.comments.push({
+      body: $scope.body,
+      author: 'user',
+      upvotes: 0
+    });
+    $scope.body = '';
+  };
+
   $scope.posts = posts.posts;
 });
 
-app.controller('PostCtrl', function($scope, $stateParams, posts){
-  $scope.posts = posts.posts[$stateParams.id];
+app.controller('PostsCtrl', function($scope, $stateParams, posts){
+  $scope.post = posts.posts[$stateParams.id];
 });
 
 app.config(function($stateProvider, $urlRouterProvider){
